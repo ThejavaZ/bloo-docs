@@ -1,0 +1,33 @@
+%% Bloo — Ciclo de vida de una petición de negocio
+%% Recorrido completo desde el navegador hasta la respuesta JSON.
+%% Ver docs/architecture/system-design.md
+sequenceDiagram
+    autonumber
+    participant FE as Frontend Next.js
+    participant MW as Middleware Laravel
+    participant DB as Base de datos
+    participant RES as Respuesta JSON
+
+    FE->>MW: GET /api/clients?search=ana<br/>Authorization: Bearer &lt;token&gt;
+    activate MW
+
+    alt sin token o token inválido
+        MW-->>FE: 401 {"message": "Unauthenticated."}
+    else token válido
+        MW->>MW: auth:sanctum → usuario
+        MW->>MW: set_team_context → team_id = user.company_id
+        MW->>MW: ensure_not_maintenance → ¿empresa congelada?
+    end
+
+    alt empresa en mantenimiento
+        MW-->>FE: 503 {"success": false, "maintenance": true}
+    else empresa activa
+        MW->>DB: SELECT * FROM clients<br/>WHERE company_id = ? AND name LIKE ?
+        activate DB
+        DB-->>MW: solo registros de ESA empresa
+        deactivate DB
+        MW->>RES: paginate(15) → sobre {success, data, meta}
+        RES-->>FE: 200 {"success": true, "data": [...],<br/>"meta": {"current_page": 1, "last_page": 3, "per_page": 15, "total": 42}}
+    end
+
+    deactivate MW

@@ -1,0 +1,32 @@
+%% Bloo — Diagrama de contexto del sistema
+%% Muestra el sistema en su entorno: actores, componentes externos y fronteras.
+%% Render: Mermaid CLI (mmdc), o visor online de mermaid.live
+graph TB
+    subgraph Actors["Actores"]
+        TU[Usuario de la empresa<br/>dueño · admin · gerente · empleado · invitado]
+        OP[Operador de la plataforma<br/>rol super_admin]
+    end
+
+    subgraph Frontends["Aplicaciones cliente"]
+        FE[Frontend ERP<br/>Next.js 16 · App Router · React 19]
+        LP[Panel Landlord<br/>Vue 3 · SPA embebida]
+    end
+
+    subgraph Platform["Plataforma Bloo — un solo despliegue"]
+        API[API REST<br/>Laravel 13 · Sanctum · Spatie Permission]
+    end
+
+    subgraph Data["Persistencia"]
+        DB[(Base de datos<br/>SQLite / MySQL / PostgreSQL<br/>columna company_id en tablas de negocio)]
+    end
+
+    subgraph External["Servicios externos"]
+        SMTP[Servidor de correo<br/>recuperación de contraseña]
+    end
+
+    TU -->|usa| FE
+    OP -->|administra| LP
+    FE -->|HTTPS + Bearer token<br/>/api/*| API
+    LP -->|HTTPS + Bearer token<br/>/api/admin/*| API
+    API --> DB
+    API -.->|envío de correos<br/>opcional| SMTP

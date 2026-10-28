@@ -1,0 +1,39 @@
+%% Bloo — Modelo de multi-tenancy
+%% Cómo se identifica el tenant en cada petición y cómo se aíslan los datos.
+%% Ver docs/architecture/tenancy-model.md
+graph LR
+    subgraph Client["Cliente"]
+        T1[Token Bearer]
+    end
+
+    subgraph Resolve["Identificación del tenant"]
+        T1 --> PAT[personal_access_tokens]
+        PAT --> U[Usuario]
+        U --> CID["company_id<br/>única fuente de verdad"]
+    end
+
+    subgraph Chain["Middleware de cada petición"]
+        CID --> M1["1. auth:sanctum"]
+        M1 --> M2["2. set_team_context<br/>team_id = company_id"]
+        M2 --> M3["3. ensure_not_maintenance<br/>503 si la empresa está congelada"]
+    end
+
+    subgraph Scope["Aislamiento en el controller"]
+        M3 --> F1["Listado: WHERE company_id = ?"]
+        M3 --> F2["Detalle/edición:<br/>verificar propiedad → 403 si no"]
+        M3 --> F3["Alta: company_id asignado<br/>por el servidor"]
+    end
+
+    subgraph DB["Base de datos compartida"]
+        F1 --> T[(Tablas de negocio<br/>clients · invoices · products ·<br/>expenses · bank_accounts · kanban)]
+        F2 --> T
+        F3 --> T
+    end
+
+    subgraph Land["Landlord — excepción explícita"]
+        L["Rutas /api/admin/*<br/>ensure_superadmin<br/>SIN contexto de equipo"] --> T
+        L --> AL[(admin_audit_logs)]
+    end
+
+    style Land fill:#fff4e6,stroke:#d97706
+    style DB fill:#eef6ff,stroke:#2563eb
