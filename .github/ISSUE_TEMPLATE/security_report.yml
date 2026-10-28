@@ -1,0 +1,78 @@
+name: Reporte de seguridad
+description: Reporta una vulnerabilidad del diseño de Bloo o información sensible expuesta en la documentación
+title: "security: "
+labels: ["security"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **No divulgues una vulnerabilidad en un issue público.**
+
+        Prefiere el reporte privado de GitHub: pestaña *Security* →
+        *Report a vulnerability*. Si no está disponible, abre el issue
+        **sin detalles de explotación** y deja constancia de que puedes ser
+        contactado en privado.
+
+        Este repositorio contiene solo documentación. Un reporte aquí puede
+        ser: (a) información sensible publicada por error, o (b) una
+        debilidad del **diseño** descrito que conviene corregir en el sistema.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área afectada
+      options:
+        - Información sensible publicada en la documentación
+        - Aislamiento entre tenants (diseño)
+        - Autenticación y gestión de tokens
+        - Autorización y roles (escalada de privilegios)
+        - Panel Landlord e impersonación
+        - Respaldos y descargas
+        - Manejo de errores y logs
+        - Configuración y despliegue (secretos, imágenes)
+        - Otro
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: Resumen breve
+      description: Una línea, sin detalles de explotación.
+      placeholder: La documentación de respaldos revela...
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impacto
+      description: ¿Qué podría lograr alguien con esto?
+      placeholder: Acceder a datos de otra empresa, robar tokens, exponer configuración...
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Ubicación
+      description: Archivo, sección, endpoint o commit afectado.
+      placeholder: docs/security/tenant-isolation.md · sección "Límites de la estrategia"
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-fix
+    attributes:
+      label: Corrección propuesta (opcional)
+      description: Sugerencias o un borrador de corrección son bienvenidos.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Lista de verificación
+      options:
+        - label: No incluí secretos, claves privadas ni datos personales en este reporte
+          required: true
+        - label: Entiendo que los detalles de explotación deben esperar al contacto privado
+          required: true

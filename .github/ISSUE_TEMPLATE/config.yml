@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentación (README)
+    url: https://github.com/ThejavaZ/Bloo-Docs#readme
+    about: Qué es Bloo, estado por módulo y mapa completo de la documentación.
+  - name: Roadmap
+    url: https://github.com/ThejavaZ/Bloo-Docs/blob/main/docs/roadmap.md
+    about: Consulta qué está implementado, en desarrollo y planeado antes de pedir documentación nueva.
+  - name: Referencia de la API (backend)
+    url: https://github.com/ThejavaZ/erp-api/blob/main/docs/API.md
+    about: Listado exhaustivo de endpoints del backend Bloo.

@@ -1,0 +1,66 @@
+name: Tarea
+description: Mantenimiento, CI, estructura del repositorio u otras tareas que no son una funcionalidad nueva
+title: "chore: "
+labels: ["task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usa este formulario para trabajo que no es una funcionalidad nueva ni
+        un error: mantenimiento de la estructura, CI, plantillas, diagramas o
+        limpieza. Busca primero entre los
+        [issues existentes](https://github.com/ThejavaZ/Bloo-Docs/issues).
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Tipo de tarea
+      options:
+        - chore (estructura, limpieza, configuración)
+        - ci (workflows y verificaciones)
+        - docs (correcciones y mejoras de redacción)
+        - diagrams (diagramas Mermaid)
+        - adr (registro de decisiones)
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: Qué y por qué
+      description: El cambio y la razón por la que vale la pena hacerlo.
+      placeholder: El índice de ADRs no refleja las decisiones agregadas recientemente...
+    validations:
+      required: true
+
+  - type: textarea
+    id: files
+    attributes:
+      label: Archivos afectados
+      description: Archivos que esperas tocar.
+      placeholder: |
+        - docs/architecture/decisions/README.md
+        - .github/workflows/ci.yml
+
+  - type: textarea
+    id: verify
+    attributes:
+      label: Cómo verificar
+      description: Pasos que un revisor puede repetir.
+      placeholder: |
+        1. `python .github/scripts/check-docs.py`
+        2. Revisar el render del diagrama en GitHub
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Lista de verificación
+      options:
+        - label: Busqué entre los issues existentes
+          required: true
+        - label: `python .github/scripts/check-docs.py` pasa localmente
+          required: true
+        - label: README, overview o roadmap se actualizarán si cambia la estructura

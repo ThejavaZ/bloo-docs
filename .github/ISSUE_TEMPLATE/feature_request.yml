@@ -1,0 +1,73 @@
+name: Documentación propuesta
+description: Sugiere un documento nuevo o una mejora de la documentación existente
+title: "docs: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bloo-Docs documenta el **sistema real**: lo implementado, lo que está
+        en desarrollo y lo planeado, con estado explícito. Revisa el
+        [roadmap](https://github.com/ThejavaZ/Bloo-Docs/blob/main/docs/roadmap.md)
+        antes de proponer.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Necesidad
+      description: ¿Qué concepto o decisión no está documentado y por qué importa?
+      placeholder: No hay explicación de cómo se aplica el límite de usuarios de un plan...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Propuesta
+      description: ¿Qué documento o sección crearías y con qué contenido?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área del documento
+      options:
+        - Visión general y roadmap
+        - Requisitos
+        - Arquitectura
+        - API
+        - Seguridad
+        - Operación
+        - ADR (nueva decisión arquitectónica)
+        - Diagramas
+    validations:
+      required: true
+
+  - type: dropdown
+    id: adr
+    attributes:
+      label: ¿Requiere un ADR?
+      description: Si propone documentar una decisión de diseño, ¿corresponde registrarla como ADR?
+      options:
+        - No aplica
+        - Sí, es una decisión arquitectónica que debe registrarse
+        - No estoy seguro
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Otras alternativas (opcional)
+      description: Otros enfoques que consideraste y por qué no convencen.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Lista de verificación
+      options:
+        - label: Busqué entre los issues existentes y el roadmap
+          required: true
+        - label: Entiendo que la documentación describe el sistema real, no el deseado
+          required: true

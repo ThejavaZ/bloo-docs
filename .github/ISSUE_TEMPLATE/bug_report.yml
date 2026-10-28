@@ -1,0 +1,79 @@
+name: Documentación desactualizada
+description: Algo documentado no coincide con el sistema real o está incompleto
+title: "docs: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por revisar la documentación de Bloo.
+
+        Antes de abrir el issue, busca entre los
+        [issues existentes](https://github.com/ThejavaZ/Bloo-Docs/issues)
+        para evitar duplicados. Si se trata de una vulnerabilidad de
+        seguridad, **no abras un issue público**: usa la plantilla
+        *Reporte de seguridad*.
+
+  - type: input
+    id: document
+    attributes:
+      label: Documento
+      description: Ruta del documento afectado.
+      placeholder: docs/architecture/tenancy-model.md
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options:
+        - Visión general y roadmap
+        - Requisitos
+        - Arquitectura (system design, data model)
+        - Multi-tenancy y aislamiento
+        - Autenticación y autorización
+        - Convenciones de la API
+        - Seguridad
+        - Operación y configuración
+        - ADR (decisiones)
+        - Diagramas
+        - Otro
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: ¿Qué está mal o falta?
+      description: Describe la inconsistencia con claridad y concisión.
+      placeholder: El documento dice que el mantenimiento responde 403, pero el backend devuelve 503...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reality
+    attributes:
+      label: Comportamiento real
+      description: |
+        Si lo conoces, indica qué hace realmente el sistema (código, prueba
+        o petición HTTP que lo demuestra).
+      placeholder: |
+        `EnsureTenantIsNotInMaintenance` devuelve 503 con `{"success": false, "maintenance": true}`.
+      render: shell
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Corrección sugerida (opcional)
+      description: Texto propuesto o enlace a la fuente que respalda la corrección.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Lista de verificación
+      options:
+        - label: Busqué entre los issues existentes
+          required: true
+        - label: No incluí credenciales, datos privados ni código fuente confidencial
+          required: true
