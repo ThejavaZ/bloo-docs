@@ -9,7 +9,7 @@ body:
         Usa este formulario para trabajo que no es una funcionalidad nueva ni
         un error: mantenimiento de la estructura, CI, plantillas, diagramas o
         limpieza. Busca primero entre los
-        [issues existentes](https://github.com/ThejavaZ/Bloo-Docs/issues).
+        [issues existentes](https://github.com/ThejavaZ/bloo-docs/issues).
 
   - type: dropdown
     id: kind

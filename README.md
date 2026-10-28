@@ -113,7 +113,7 @@ La referencia exhaustiva de endpoints vive en el backend: [`erp-api/docs/API.md`
 
 | Repositorio | Contenido | Rol |
 |---|---|---|
-| `ThejavaZ/Bloo-Docs` | Este repositorio: documentación técnica (Markdown + Mermaid) | Público |
+| `ThejavaZ/bloo-docs` | Este repositorio: documentación técnica (Markdown + Mermaid) | Público |
 | `ThejavaZ/erp-api` | Backend Laravel 13 + Panel Landlord (Vue 3) | Implementación |
 | `ThejavaZ/erp-client` | Frontend Next.js 16 | Implementación |
 

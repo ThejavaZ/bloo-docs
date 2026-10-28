@@ -8,7 +8,7 @@ body:
       value: |
         Bloo-Docs documenta el **sistema real**: lo implementado, lo que está
         en desarrollo y lo planeado, con estado explícito. Revisa el
-        [roadmap](https://github.com/ThejavaZ/Bloo-Docs/blob/main/docs/roadmap.md)
+        [roadmap](https://github.com/ThejavaZ/bloo-docs/blob/main/docs/roadmap.md)
         antes de proponer.
 
   - type: textarea
